@@ -35,7 +35,7 @@ export default function App() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <p className="m-4">Search Pokemon:</p>
+        <p className="m-4">Search Pokemon by Name:</p>
         <form
           className="flex flex-col items-center justify-center"
           onSubmit={handleSubmit}
@@ -43,16 +43,15 @@ export default function App() {
           <input
             className="peer h-full w-full rounded-[7px] m-4 border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
             type="text"
-            placeholder="Enter a Pokemon code"
+            placeholder="Partial name is okay"
             onChange={handleChange}
           />
-          <button className="border-2 rounded-md m-4 py-2 px-4">Submit</button>
+          <button className="border-2 rounded-md m-4 py-2 px-4">Search</button>
         </form>
         <div className="flex flex-row flex-wrap items-center justify-center">
           <Cards />
         </div>
       </div>
-      {/* <img src={cardSrc} alt={cardObject.name} className="m-4" /> */}
     </main>
   );
 }
