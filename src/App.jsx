@@ -1,10 +1,12 @@
 import { useState } from "react";
 import pokemon from "pokemontcgsdk";
+import { Alert } from "@mui/material";
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
 export default function App() {
   const [params, setParams] = useState("");
   const [searchResults, setSearchResults] = useState({ data: {} });
+  const [warning, setWarning] = useState(false);
 
   const handleChange = (event) => {
     setParams(event.target.value);
@@ -12,11 +14,16 @@ export default function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    pokemon.card.where({ q: `name:*${params}*` }).then((result) => {
-      // add results to state
-      setSearchResults(result);
-      console.log(searchResults);
-    });
+    if (params.length < 3) {
+      setWarning(true);
+    } else {
+      setWarning(false);
+      pokemon.card.where({ q: `name:*${params}*` }).then((result) => {
+        // if params less than 3 characters, show alert
+        setSearchResults(result);
+        console.log(searchResults);
+      });
+    }
   };
 
   const Cards = () => {
@@ -48,10 +55,17 @@ export default function App() {
           />
           <button className="border-2 rounded-md m-4 py-2 px-4">Search</button>
         </form>
-        {searchResults.data[0] && <p>{searchResults.data.length + ' results'}</p>}
+        {warning && (
+          <Alert className="m-4" severity="info">
+            Please enter at least 3 characters
+          </Alert>
+        )}
+        {searchResults.data[0] && (
+          <p>{searchResults.data.length + " results"}</p>
+        )}
         {searchResults.count === 0 && <p>Nothing found</p>}
         <div className="flex flex-row flex-wrap items-center justify-center">
-          <Cards />
+          {searchResults.count !== 0 && <Cards />}
         </div>
       </div>
     </main>
