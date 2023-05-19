@@ -12,7 +12,7 @@ export default function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    pokemon.card.where({ q: `name:${params}*` }).then((result) => {
+    pokemon.card.where({ q: `name:*${params}*` }).then((result) => {
       // add results to state
       setSearchResults(result);
       console.log(searchResults);
@@ -48,6 +48,8 @@ export default function App() {
           />
           <button className="border-2 rounded-md m-4 py-2 px-4">Search</button>
         </form>
+        {searchResults.data[0] && <p>{searchResults.data.length + ' results'}</p>}
+        {searchResults.count === 0 && <p>Nothing found</p>}
         <div className="flex flex-row flex-wrap items-center justify-center">
           <Cards />
         </div>
