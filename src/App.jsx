@@ -1,24 +1,37 @@
 import { useState } from "react";
 import pokemon from "pokemontcgsdk";
-import { Alert } from "@mui/material";
+import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
 export default function App() {
   const [params, setParams] = useState("");
   const [searchResults, setSearchResults] = useState({ data: {} });
+  const [searchType, setSearchType] = useState("name");
   const [warning, setWarning] = useState(false);
 
   const handleChange = (event) => {
     setParams(event.target.value);
   };
 
+  const handleSearchTypeChange = (event) => {
+    setSearchType(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (params.length < 3) {
       setWarning(true);
+      setSearchResults({ data: {} });
     } else {
       setWarning(false);
-      pokemon.card.where({ q: `name:*${params}*` }).then((result) => {
+      pokemon.card.where({ q: `${searchType}:*${params}*` }).then((result) => {
         setSearchResults(result);
       });
     }
@@ -40,19 +53,42 @@ export default function App() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <p className="m-4">Search Pokemon by Name:</p>
-        <form
-          className="flex flex-col items-center justify-center"
-          onSubmit={handleSubmit}
-        >
-          <input
-            className="peer h-full w-full rounded-[7px] m-4 border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-            type="text"
-            placeholder="Partial name is okay"
+        <FormControl>
+          <TextField
+            required
+            id="outlined-basic"
+            label="Search Pokemon"
+            variant="outlined"
             onChange={handleChange}
           />
-          <button className="border-2 rounded-md m-4 py-2 px-4">Search</button>
-        </form>
+          <RadioGroup
+            aria-labelledby="search-type-group-label"
+            defaultValue="name"
+            name="radio-buttons-group"
+            onChange={handleSearchTypeChange}
+            sx={{ marginTop: "1rem" }}
+          >
+            <FormControlLabel
+              value="name"
+              control={<Radio />}
+              label="Search name"
+              sx={{ margin: "0 auto", paddingRight: "0.5rem" }}
+            />
+            <FormControlLabel
+              value="attacks.name"
+              control={<Radio />}
+              label="Search attack"
+              sx={{ margin: "0 auto", paddingRight: "0.5rem" }}
+            />
+          </RadioGroup>
+          <Button
+            variant="outlined"
+            sx={{ margin: "1rem" }}
+            onClick={handleSubmit}
+          >
+            Search
+          </Button>
+        </FormControl>
         {warning && (
           <Alert className="m-4" severity="info">
             Please enter at least 3 characters
