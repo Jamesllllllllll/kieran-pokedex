@@ -7,7 +7,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
 export default function App() {
@@ -17,7 +16,9 @@ export default function App() {
   const [warning, setWarning] = useState(false);
 
   const handleChange = (event) => {
-    setParams(event.target.value);
+    const value = event.target.value;
+    const searchValue = value.replaceAll(" ", "*");
+    setParams(searchValue);
   };
 
   const handleSearchTypeChange = (event) => {
