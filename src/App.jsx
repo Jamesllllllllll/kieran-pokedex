@@ -19,9 +19,7 @@ export default function App() {
     } else {
       setWarning(false);
       pokemon.card.where({ q: `name:*${params}*` }).then((result) => {
-        // if params less than 3 characters, show alert
         setSearchResults(result);
-        console.log(searchResults);
       });
     }
   };
