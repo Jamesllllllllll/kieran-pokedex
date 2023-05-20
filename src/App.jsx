@@ -7,7 +7,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
@@ -89,15 +88,6 @@ export default function App() {
               sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
           </RadioGroup>
-          {isLoading ? (
-            <LoadingButton
-              loading
-              variant="outlined"
-              sx={{ margin: "1rem" }}
-            >
-              Search
-            </LoadingButton>
-          ) : (
             <Button
               type="submit"
               variant="outlined"
@@ -106,7 +96,6 @@ export default function App() {
             >
               Search
             </Button>
-          )}
         </FormControl>
         {warning && (
           <Alert className="m-4" severity="info">
