@@ -1,6 +1,6 @@
 import { useState } from "react";
 import pokemon from "pokemontcgsdk";
-import Button from "@mui/material/Button";
+import Button from "@mui/joy/Button";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
@@ -30,7 +30,7 @@ export default function App() {
   const handleSubmit = (event) => {
     setIsLoading(true);
     event.preventDefault();
-    console.log(isLoading)
+    console.log(isLoading);
     if (params.length < 3) {
       setWarning(true);
       setIsLoading(false);
@@ -88,6 +88,16 @@ export default function App() {
               sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
           </RadioGroup>
+          {isLoading ? (
+            <Button
+              loading
+              type="submit"
+              variant="outlined"
+              sx={{ margin: "1rem" }}
+            >
+              Search
+            </Button>
+          ) : (
             <Button
               type="submit"
               variant="outlined"
@@ -96,6 +106,7 @@ export default function App() {
             >
               Search
             </Button>
+          )}
         </FormControl>
         {warning && (
           <Alert className="m-4" severity="info">
@@ -103,7 +114,9 @@ export default function App() {
           </Alert>
         )}
         {searchResults.data[0] && (
-          <p className="font-semibold">{searchResults.data.length + " results"}</p>
+          <p className="font-semibold">
+            {searchResults.data.length + " results"}
+          </p>
         )}
         {searchResults.count === 0 && <p>Nothing found</p>}
         <div className="flex flex-row flex-wrap items-center justify-center">
