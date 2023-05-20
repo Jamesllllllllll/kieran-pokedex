@@ -7,6 +7,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import LoadingButton from "@mui/lab/LoadingButton";
+
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
 export default function App() {
@@ -14,6 +16,7 @@ export default function App() {
   const [searchResults, setSearchResults] = useState({ data: {} });
   const [searchType, setSearchType] = useState("name");
   const [warning, setWarning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -26,14 +29,18 @@ export default function App() {
   };
 
   const handleSubmit = (event) => {
+    setIsLoading(true);
     event.preventDefault();
+    console.log(isLoading)
     if (params.length < 3) {
       setWarning(true);
+      setIsLoading(false);
       setSearchResults({ data: {} });
     } else {
       setWarning(false);
       pokemon.card.where({ q: `${searchType}:*${params}*` }).then((result) => {
         setSearchResults(result);
+        setIsLoading(false);
       });
     }
   };
@@ -73,22 +80,33 @@ export default function App() {
               value="name"
               control={<Radio />}
               label="Search name"
-              sx={{ margin: "0 auto", paddingRight: "0.5rem" }}
+              sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
             <FormControlLabel
               value="attacks.name"
               control={<Radio />}
               label="Search attack"
-              sx={{ margin: "0 auto", paddingRight: "0.5rem" }}
+              sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
           </RadioGroup>
-          <Button
-            variant="outlined"
-            sx={{ margin: "1rem" }}
-            onClick={handleSubmit}
-          >
-            Search
-          </Button>
+          {isLoading ? (
+            <LoadingButton
+              loading
+              variant="outlined"
+              sx={{ margin: "1rem" }}
+            >
+              Search
+            </LoadingButton>
+          ) : (
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ margin: "1rem" }}
+              onClick={handleSubmit}
+            >
+              Search
+            </Button>
+          )}
         </FormControl>
         {warning && (
           <Alert className="m-4" severity="info">
