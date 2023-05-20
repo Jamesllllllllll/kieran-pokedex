@@ -79,13 +79,13 @@ export default function App() {
             <FormControlLabel
               value="name"
               control={<Radio />}
-              label="Search name"
+              label="Search by name"
               sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
             <FormControlLabel
               value="attacks.name"
               control={<Radio />}
-              label="Search attack"
+              label="Search by attack"
               sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
           </RadioGroup>
