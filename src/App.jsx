@@ -58,9 +58,9 @@ export default function App() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex flex-col items-center justify-center">
-        <FormControl>
+    <main className="flex min-h-screen flex-col items-center justify-between px-4 py-12 md:p-24">
+      <div className="flex flex-col items-center justify-center w-full">
+        <FormControl className="w-9/12 sm:w-72">
           <TextField
             required
             id="outlined-basic"
@@ -103,7 +103,7 @@ export default function App() {
           </Alert>
         )}
         {searchResults.data[0] && (
-          <p>{searchResults.data.length + " results"}</p>
+          <p className="font-semibold">{searchResults.data.length + " results"}</p>
         )}
         {searchResults.count === 0 && <p>Nothing found</p>}
         <div className="flex flex-row flex-wrap items-center justify-center">
