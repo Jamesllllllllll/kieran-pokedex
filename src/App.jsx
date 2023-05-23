@@ -7,9 +7,10 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from '@mui/joy/FormLabel';
+import FormLabel from "@mui/joy/FormLabel";
 import Select from "@mui/material/Select";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
+import { Suspense } from "react";
 
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
@@ -66,7 +67,9 @@ export default function App() {
           key={`card-${card.id}`}
           className="flex flex-col items-center justify-center"
         >
-          <img src={card.images.small} alt={card.name} className="m-4" />
+          <Suspense>
+            <img src={card.images.small} alt={card.name} className="m-4" />
+          </Suspense>
         </div>
       );
     });
@@ -105,7 +108,11 @@ export default function App() {
               sx={{ margin: "0 auto", marginLeft: "1rem" }}
             />
           </RadioGroup>
-          <FormLabel sx={{ marginTop: "1rem", marginLeft: "1rem", fontSize: "1rem" }}>Card type</FormLabel>
+          <FormLabel
+            sx={{ marginTop: "1rem", marginLeft: "1rem", fontSize: "1rem" }}
+          >
+            Card type
+          </FormLabel>
           <Select
             value={subtype}
             sx={{ margin: "1rem" }}
