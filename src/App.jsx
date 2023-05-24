@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import pokemon from "pokemontcgsdk";
 import Button from "@mui/joy/Button";
 import Alert from "@mui/material/Alert";
@@ -10,7 +10,6 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { Suspense } from "react";
 
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 
@@ -125,6 +124,7 @@ export default function App() {
             <MenuItem value="MEGA">MEGA</MenuItem>
             <MenuItem value="V">V</MenuItem>
             <MenuItem value="VMAX">VMAX</MenuItem>
+            <MenuItem value="VSTAR">VSTAR</MenuItem>
           </Select>
           {isLoading ? (
             <Button
