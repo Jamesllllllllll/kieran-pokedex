@@ -10,6 +10,9 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import { inject } from '@vercel/analytics';
+
+inject();
 
 pokemon.configure({ apiKey: import.meta.env.API_KEY });
 

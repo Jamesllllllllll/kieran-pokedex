@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/joy": "^5.0.0-alpha.80",
     "@mui/material": "^5.13.1",
+    "@vercel/analytics": "^1.0.1",
     "dotenv": "^16.0.3",
     "pokemontcgsdk": "^2.0.0",
     "react": "^18.2.0",
