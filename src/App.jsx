@@ -11,6 +11,7 @@ import FormLabel from "@mui/joy/FormLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { inject } from '@vercel/analytics';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 inject();
 
@@ -69,9 +70,7 @@ export default function App() {
           key={`card-${card.id}`}
           className="flex flex-col items-center justify-center"
         >
-          <Suspense>
-            <img src={card.images.small} alt={card.name} className="m-4" />
-          </Suspense>
+            <LazyLoadImage src={card.images.small} alt={card.name} width={245} height={342} className="m-4" loading="lazy" />
         </div>
       );
     });
