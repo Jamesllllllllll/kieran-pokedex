@@ -1,4 +1,4 @@
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import pokemon from "pokemontcgsdk";
 import Button from "@mui/joy/Button";
 import Alert from "@mui/material/Alert";
