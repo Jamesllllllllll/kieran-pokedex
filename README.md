@@ -1,4 +1,4 @@
-# Simple Pokedex 
+# Simple Pokedex  <img src="https://cdn3.emoji.gg/emojis/1545-pika-hi.gif" width="64px" height="64px" alt="Pika_Hi">
 
 Production: [Kieran's Pokedex](https://kieran-pokedex.vercel.app)
 
